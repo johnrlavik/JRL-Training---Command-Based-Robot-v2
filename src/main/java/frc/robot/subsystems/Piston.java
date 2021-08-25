@@ -16,8 +16,19 @@ public class Piston extends SubsystemBase {
     piston1 = new DoubleSolenoid(Constants.PISTON1_FORWARD, Constants.PISTON1_REVERSE);
   }
 
-  @Override
+    @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  
+  public void ExtendPiston(){
+    piston1.set(DoubleSolenoid.Value.kForward);
+  }
+  public void RetractPiston(){
+    piston1.set(DoubleSolenoid.Value.kReverse);
+  }
+  public void PistonOff(){
+    piston1.set(DoubleSolenoid.Value.kOff);
   }
 }

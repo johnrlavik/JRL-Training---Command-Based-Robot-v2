@@ -4,13 +4,16 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ActuatePiston1 extends CommandBase {
-  /** Creates a new ActuatePiston1. */
-  public ActuatePiston1() {
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+public class ExtendPiston extends CommandBase {
+  DoubleSolenoid piston1;
+  /** Creates a new ExtendPiston. */
+  public ExtendPiston(DoubleSolenoid p1) {
+    piston1 = p1;
+    //addRequirements(piston1);
+    }
 
   // Called when the command is initially scheduled.
   @Override
@@ -18,11 +21,15 @@ public class ActuatePiston1 extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    piston1.set(DoubleSolenoid.Value.kForward);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    piston1.set(DoubleSolenoid.Value.kOff);
+  }
 
   // Returns true when the command should end.
   @Override
