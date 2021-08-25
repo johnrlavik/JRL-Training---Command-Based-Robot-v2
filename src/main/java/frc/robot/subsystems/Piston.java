@@ -11,9 +11,9 @@ import frc.robot.Constants;
 public class Piston extends SubsystemBase {
   DoubleSolenoid piston1;
 
-  /** Creates a new Piston. */
+  /** Creates a new piston. */
   public Piston() {
-    piston1 = new DoubleSolenoid(Constants.PISTON1_FORWARD, Constants.PISTON1_REVERSE);
+    piston1 = new DoubleSolenoid(Constants.PISTON1_PORT_FORWARD, Constants.PISTON1_PORT_REVERSE);
   }
 
     @Override
@@ -21,7 +21,7 @@ public class Piston extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  
+
   public void ExtendPiston(){
     piston1.set(DoubleSolenoid.Value.kForward);
   }

@@ -4,13 +4,17 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoysticks;
+import frc.robot.commands.ExtendPiston;
+import frc.robot.commands.RetractPiston;
 import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -29,10 +33,14 @@ public class RobotContainer {
   private final DriveWithJoysticks driveWithJoysticks;
   private final DriveForwardTimed driveForwardTimed;
   public static Joystick driverOldStyleJoystick;
-  public static XboxController driverJoystick;
+  //public static XboxController driverJoystick;
   //Shooter declare
   private final Shooter shooter;
   private final ShootBall shootBall;
+  //Pneumatics declare
+  private final Piston piston1;
+  private final ExtendPiston extendPiston;
+  private final RetractPiston retractPiston;
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -45,12 +53,15 @@ public class RobotContainer {
     driveForwardTimed = new DriveForwardTimed(driveTrain);
     driveForwardTimed.addRequirements(driveTrain);
 
-    driverOldStyleJoystick = new Joystick(Constants.JOYSTICK1_NUMBER);
-    driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
+    driverOldStyleJoystick = new Joystick(Constants.JOYSTICK_NUMBER);
+    //driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
 
     shooter = new Shooter();
     shootBall = new ShootBall(shooter);
     shootBall.addRequirements(shooter);
+
+    piston1 = new Piston();
+    extendPiston = new ExtendPiston(piston1);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -64,8 +75,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    JoystickButton shootButton = new JoystickButton(driverJoystick, XboxController.Button.kBumperRight.value);
+    JoystickButton shootButton = new JoystickButton(driverOldStyleJoystick, Constants.SHOOTER_BUTTON_NUMBER);
     shootButton.whileHeld(new ShootBall(shooter));
+
+    JoystickButton pistonButton = new JoystickButton(driverOldStyleJoystick, Constants.PISTON_BUTTON_NUMBER);
+    pistonButton.whileHeld(new ExtendPiston(p1))
 
     
   }

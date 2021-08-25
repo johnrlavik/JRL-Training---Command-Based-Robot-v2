@@ -13,6 +13,7 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
+  // Declare variables
   Spark leftFront;
   Spark leftBack;
   Spark rightFront;
@@ -20,6 +21,8 @@ public class DriveTrain extends SubsystemBase {
   SpeedControllerGroup leftMotors;
   SpeedControllerGroup rightMotors;
   DifferentialDrive drive;
+
+  //Class constructor(s)
   public DriveTrain() {
   leftFront = new Spark(Constants.LEFT_FRONT);
   leftFront.setInverted(true);
