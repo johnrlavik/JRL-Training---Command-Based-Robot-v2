@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ExtendPiston extends CommandBase {
-  DoubleSolenoid piston1;
-  /** Creates a new ExtendPiston. */
-  public ExtendPiston(DoubleSolenoid p1) {
+  DoubleSolenoid piston1; //declare variable
+
+  public ExtendPiston(DoubleSolenoid p1) { //Class constructor
     piston1 = p1;
     //addRequirements(piston1);
     }

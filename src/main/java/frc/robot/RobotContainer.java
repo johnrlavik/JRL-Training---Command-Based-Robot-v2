@@ -14,7 +14,6 @@ import frc.robot.commands.ExtendPiston;
 import frc.robot.commands.RetractPiston;
 import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -38,7 +37,7 @@ public class RobotContainer {
   private final Shooter shooter;
   private final ShootBall shootBall;
   //Pneumatics declare
-  private final Piston piston1;
+  private final DoubleSolenoid piston1;
   private final ExtendPiston extendPiston;
   private final RetractPiston retractPiston;
   
@@ -60,8 +59,9 @@ public class RobotContainer {
     shootBall = new ShootBall(shooter);
     shootBall.addRequirements(shooter);
 
-    piston1 = new Piston();
+    piston1 = new DoubleSolenoid(Constants.PISTON1_PORT_FORWARD, Constants.PISTON1_PORT_REVERSE);
     extendPiston = new ExtendPiston(piston1);
+    retractPiston = new RetractPiston(piston1);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -79,7 +79,8 @@ public class RobotContainer {
     shootButton.whileHeld(new ShootBall(shooter));
 
     JoystickButton pistonButton = new JoystickButton(driverOldStyleJoystick, Constants.PISTON_BUTTON_NUMBER);
-    pistonButton.whileHeld(new ExtendPiston(p1))
+    pistonButton.whileHeld(extendPiston);
+    pistonButton.whenReleased(retractPiston);
 
     
   }
