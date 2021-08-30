@@ -32,14 +32,18 @@ public final class Constants {
 	//USE ONE OR THE OTHER OF FOLLOWING
 	//public static final int JOYSTICK1_NUMBER = 1;
 	public static final int JOYSTICK_NUMBER = 0;
-	public static final int SHOOTER_BUTTON_NUMBER = 1;
-	public static final int PISTON_BUTTON_NUMBER = 2;
+	public static final int SHOOTER_BUTTON_NUMBER = 2;
+	public static final int PISTON_CLAW_BUTTON_NUMBER = 3;
+	public static final int PISTON_ARM_BUTTON_NUMBER = 7;
 
 	public static final double SHOOTER_SPEED = 0.5;
 
 	//PCM port for piston
 	public static final int PISTON1_PORT_FORWARD = 0;
 	public static final int PISTON1_PORT_REVERSE = 1;
+	public static final int PISTON2_PORT_FORWARD = 2;
+	public static final int PISTON2_PORT_REVERSE = 3;
+
 	
 
 
