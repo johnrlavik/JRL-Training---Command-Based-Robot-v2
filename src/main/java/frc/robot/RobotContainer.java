@@ -37,9 +37,12 @@ public class RobotContainer {
   private final Shooter shooter;
   private final ShootBall shootBall;
   //Pneumatics declare
-  private final DoubleSolenoid piston1;
-  private final ExtendPiston extendPiston;
-  private final RetractPiston retractPiston;
+  private final DoubleSolenoid clawPiston;
+  private final DoubleSolenoid armPiston;
+  private final ExtendPiston extendClawPiston;
+  private final RetractPiston retractClawPiston;
+  private final ExtendPiston extendArmPiston;
+  private final RetractPiston retractArmPiston;
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -53,15 +56,17 @@ public class RobotContainer {
     driveForwardTimed.addRequirements(driveTrain);
 
     driverOldStyleJoystick = new Joystick(Constants.JOYSTICK_NUMBER);
-    //driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
-
+    //Shooter
     shooter = new Shooter();
     shootBall = new ShootBall(shooter);
     shootBall.addRequirements(shooter);
-
-    piston1 = new DoubleSolenoid(Constants.PISTON1_PORT_FORWARD, Constants.PISTON1_PORT_REVERSE);
-    extendPiston = new ExtendPiston(piston1);
-    retractPiston = new RetractPiston(piston1);
+    //Grabber
+    clawPiston = new DoubleSolenoid(Constants.PISTON1_PORT_FORWARD, Constants.PISTON1_PORT_REVERSE);
+    armPiston = new DoubleSolenoid(Constants.PISTON2_PORT_FORWARD, Constants.PISTON2_PORT_REVERSE);
+    extendClawPiston = new ExtendPiston(clawPiston);
+    retractClawPiston = new RetractPiston(clawPiston);
+    extendArmPiston = new ExtendPiston(armPiston);
+    retractArmPiston = new RetractPiston(armPiston);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -78,9 +83,13 @@ public class RobotContainer {
     JoystickButton shootButton = new JoystickButton(driverOldStyleJoystick, Constants.SHOOTER_BUTTON_NUMBER);
     shootButton.whileHeld(new ShootBall(shooter));
 
-    JoystickButton pistonButton = new JoystickButton(driverOldStyleJoystick, Constants.PISTON_BUTTON_NUMBER);
-    pistonButton.whileHeld(extendPiston);
-    pistonButton.whenReleased(retractPiston);
+    JoystickButton pistonClawButton = new JoystickButton(driverOldStyleJoystick, Constants.PISTON_CLAW_BUTTON_NUMBER);
+    pistonClawButton.whileHeld(extendClawPiston);
+    pistonClawButton.whenReleased(retractClawPiston);
+
+    JoystickButton pistonArmButton = new JoystickButton(driverOldStyleJoystick, Constants.PISTON_ARM_BUTTON_NUMBER);
+    pistonArmButton.whileHeld(extendArmPiston);
+    pistonArmButton.whenReleased(retractArmPiston);
 
     
   }
