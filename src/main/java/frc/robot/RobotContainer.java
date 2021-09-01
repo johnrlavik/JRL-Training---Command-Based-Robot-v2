@@ -90,8 +90,6 @@ public class RobotContainer {
     JoystickButton pistonArmButton = new JoystickButton(driverOldStyleJoystick, Constants.PISTON_ARM_BUTTON_NUMBER);
     pistonArmButton.whileHeld(extendArmPiston);
     pistonArmButton.whenReleased(retractArmPiston);
-
-    
   }
 
   /**

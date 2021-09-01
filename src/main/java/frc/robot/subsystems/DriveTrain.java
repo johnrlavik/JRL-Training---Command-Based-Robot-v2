@@ -44,7 +44,7 @@ public class DriveTrain extends SubsystemBase {
     rightMotors = new SpeedControllerGroup(rightFront, rightBack);
     drive = new DifferentialDrive(leftMotors, rightMotors);
 
-    m_leftEncoder = new Encoder(0, 1, false, CounterBase.EncodingType.k4X);
+    m_leftEncoder = new Encoder(0, 1, true, CounterBase.EncodingType.k4X);
     m_rightEncoder = new Encoder(2, 3, false, CounterBase.EncodingType.k4X);
     m_leftEncoder.setDistancePerPulse(1.0 / 360.0 * 2.0 * Math.PI * 1.5);
     m_rightEncoder.setDistancePerPulse(1.0 / 360.0 * 2.0 * Math.PI * 1.5);
@@ -59,16 +59,20 @@ public class DriveTrain extends SubsystemBase {
   public void driveWithJoysticks(Joystick controller, double speed){
     drive.arcadeDrive(controller.getRawAxis(Constants.XBOX_LEFT_Y_AXIS)*speed, controller.getRawAxis(Constants.XBOX_LEFT_X_AXIS)*speed);
     SmartDashboard.putNumber("Left Encoder Distance", m_leftEncoder.getDistance());
+    SmartDashboard.putNumber("Left Actual Feet", m_leftEncoder.getDistance()/12);
     SmartDashboard.putNumber("Left Encoder Rate", m_leftEncoder.getRate());
     SmartDashboard.putNumber("Right Encoder Distance", m_rightEncoder.getDistance());
+    SmartDashboard.putNumber("Right Actual Feet", m_rightEncoder.getDistance()/12);
     SmartDashboard.putNumber("Right Encoder Rate", m_rightEncoder.getRate());
   }
 
   public void driveForward(double speed){
     drive.tankDrive(speed, speed);
     SmartDashboard.putNumber("Left Encoder Distance", m_leftEncoder.getDistance());
+    SmartDashboard.putNumber("Left Actual Feet", m_leftEncoder.getDistance()/12);
     SmartDashboard.putNumber("Left Encoder Rate", m_leftEncoder.getRate());
     SmartDashboard.putNumber("Right Encoder Distance", m_rightEncoder.getDistance());
+    SmartDashboard.putNumber("Right Actual Feet", m_rightEncoder.getDistance()/12);
     SmartDashboard.putNumber("Right Encoder Rate", m_rightEncoder.getRate());
   }
 
