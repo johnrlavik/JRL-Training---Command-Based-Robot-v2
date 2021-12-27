@@ -32,13 +32,13 @@ public class DriveTrain extends SubsystemBase {
 //Class constructor(s)
   public DriveTrain() {
     leftFront = new Spark(Constants.LEFT_FRONT);
-    leftFront.setInverted(true);
+    leftFront.setInverted(false);
     leftBack = new Spark(Constants.LEFT_BACK);
-    leftBack.setInverted(true);
+    leftBack.setInverted(false);
     rightFront = new Spark(Constants.RIGHT_FRONT);
-    rightFront.setInverted(true);
+    rightFront.setInverted(false);
     rightBack = new Spark(Constants.RIGHT_BACK);
-    rightBack.setInverted(true);
+    rightBack.setInverted(false);
 
     leftMotors = new SpeedControllerGroup(leftFront, leftBack);
     rightMotors = new SpeedControllerGroup(rightFront, rightBack);
@@ -78,5 +78,13 @@ public class DriveTrain extends SubsystemBase {
 
   public void stop(){
     drive.stopMotor();
+  }
+  public void resetEncoders(){
+    m_leftEncoder.reset();
+    m_rightEncoder.reset();
+    SmartDashboard.putNumber("Left Encoder Distance", m_leftEncoder.getDistance());
+    SmartDashboard.putNumber("Left Actual Feet", m_leftEncoder.getDistance()/12);
+    SmartDashboard.putNumber("Right Encoder Distance ", m_rightEncoder.getDistance());
+    SmartDashboard.putNumber("Right Actual Feet", m_rightEncoder.getDistance()/12);
   }
 }
