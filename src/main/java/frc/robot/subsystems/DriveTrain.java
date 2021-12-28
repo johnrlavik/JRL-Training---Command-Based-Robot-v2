@@ -4,10 +4,13 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -21,21 +24,33 @@ public class DriveTrain extends SubsystemBase {
   SpeedControllerGroup leftMotors;
   SpeedControllerGroup rightMotors;
   DifferentialDrive drive;
+  Encoder m_leftEncoder;
+  Encoder m_rightEncoder;
 
-  //Class constructor(s)
+  //private final m_leftEncoder m_encoder = new Encoder(1, 2, false, CounterBase.EncodingType.k4X);
+
+//Class constructor(s)
   public DriveTrain() {
-  leftFront = new Spark(Constants.LEFT_FRONT);
-  leftFront.setInverted(true);
-  leftBack = new Spark(Constants.LEFT_BACK);
-  leftBack.setInverted(true);
-  rightFront = new Spark(Constants.RIGHT_FRONT);
-  rightFront.setInverted(true);
-  rightBack = new Spark(Constants.RIGHT_BACK);
-  rightBack.setInverted(true);
+    leftFront = new Spark(Constants.LEFT_FRONT);
+    leftFront.setInverted(false);
+    leftBack = new Spark(Constants.LEFT_BACK);
+    leftBack.setInverted(false);
+    rightFront = new Spark(Constants.RIGHT_FRONT);
+    rightFront.setInverted(false);
+    rightBack = new Spark(Constants.RIGHT_BACK);
+    rightBack.setInverted(false);
 
-  leftMotors = new SpeedControllerGroup(leftFront, leftBack);
-  rightMotors = new SpeedControllerGroup(rightFront, rightBack);
-  drive = new DifferentialDrive(leftMotors, rightMotors);
+    leftMotors = new SpeedControllerGroup(leftFront, leftBack);
+    rightMotors = new SpeedControllerGroup(rightFront, rightBack);
+    drive = new DifferentialDrive(leftMotors, rightMotors);
+
+    m_leftEncoder = new Encoder(0, 1, true, CounterBase.EncodingType.k4X);
+    m_rightEncoder = new Encoder(2, 3, false, CounterBase.EncodingType.k4X);
+    m_leftEncoder.setDistancePerPulse(1.0 / 360.0 * 2.0 * Math.PI * 1.5);
+    m_rightEncoder.setDistancePerPulse(1.0 / 360.0 * 2.0 * Math.PI * 1.5);
+    m_leftEncoder.setMinRate(1.0);
+    m_rightEncoder.setMinRate(1.0);
+
   }
 @Override
   public void periodic() {
@@ -43,13 +58,33 @@ public class DriveTrain extends SubsystemBase {
   }
   public void driveWithJoysticks(Joystick controller, double speed){
     drive.arcadeDrive(controller.getRawAxis(Constants.XBOX_LEFT_Y_AXIS)*speed, controller.getRawAxis(Constants.XBOX_LEFT_X_AXIS)*speed);
+    SmartDashboard.putNumber("Left Encoder Distance", m_leftEncoder.getDistance());
+    SmartDashboard.putNumber("Left Actual Feet", m_leftEncoder.getDistance()/12);
+    SmartDashboard.putNumber("Left Encoder Rate", m_leftEncoder.getRate());
+    SmartDashboard.putNumber("Right Encoder Distance", m_rightEncoder.getDistance());
+    SmartDashboard.putNumber("Right Actual Feet", m_rightEncoder.getDistance()/12);
+    SmartDashboard.putNumber("Right Encoder Rate", m_rightEncoder.getRate());
   }
 
   public void driveForward(double speed){
     drive.tankDrive(speed, speed);
+    SmartDashboard.putNumber("Left Encoder Distance", m_leftEncoder.getDistance());
+    SmartDashboard.putNumber("Left Actual Feet", m_leftEncoder.getDistance()/12);
+    SmartDashboard.putNumber("Left Encoder Rate", m_leftEncoder.getRate());
+    SmartDashboard.putNumber("Right Encoder Distance", m_rightEncoder.getDistance());
+    SmartDashboard.putNumber("Right Actual Feet", m_rightEncoder.getDistance()/12);
+    SmartDashboard.putNumber("Right Encoder Rate", m_rightEncoder.getRate());
   }
 
   public void stop(){
     drive.stopMotor();
+  }
+  public void resetEncoders(){
+    m_leftEncoder.reset();
+    m_rightEncoder.reset();
+    SmartDashboard.putNumber("Left Encoder Distance", m_leftEncoder.getDistance());
+    SmartDashboard.putNumber("Left Actual Feet", m_leftEncoder.getDistance()/12);
+    SmartDashboard.putNumber("Right Encoder Distance ", m_rightEncoder.getDistance());
+    SmartDashboard.putNumber("Right Actual Feet", m_rightEncoder.getDistance()/12);
   }
 }
