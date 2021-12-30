@@ -52,7 +52,7 @@ public final class Constants {
 
 	//gyro
 	public static final int GYRO_PORT_NUMBER = 0;	//must be either 0 or 1
-	private static final double ANGLE_SET_POINT = 0.0	//may want to move to DriveTrain and make it changeable (not final)
+	private static final double ANGLE_SET_POINT = 0.0;	//may want to move to DriveTrain and make it changeable (not final)
 	private static final double PROPORTIONAL_TURNING_CONSTANT = 0.005; // propotional turning constant
 
   // gyro calibration constant, may need to be adjusted;
