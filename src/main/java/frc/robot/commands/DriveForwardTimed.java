@@ -25,6 +25,9 @@ public class DriveForwardTimed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    //Reset encoders
+    driveTrain.resetEncoders();
+    //Start actual movement
     timer.reset();
     timer.start();
     while(timer.get() < Constants.DRIVE_FORWARD_TIME)

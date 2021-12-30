@@ -28,8 +28,12 @@ public final class Constants {
     
     
 	public static final double DRIVETRAINSPEED = 0.7;
+// Autonomous 	
 	public static final double DRIVE_FORWARD_TIME = 2.0;
-	public static final double AUTONOMOUS_SPEED = 0.4;
+	public static final double AUTONOMOUS_SPEED = 0.5;
+	public static final double DRIVE_DISTANCE_INCHES_1 = 12.0;
+	public static final double DRIVE_DISTANCE_INCHES_2 = 6.0;
+	public static final double DRIVE_DISTANCE_INCHES_3 = 24.0;
 
 	//USE ONE OR THE OTHER OF FOLLOWING
 	//public static final int JOYSTICK1_NUMBER = 1;
