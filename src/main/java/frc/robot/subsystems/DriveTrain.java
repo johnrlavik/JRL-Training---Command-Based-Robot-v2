@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Joystick;
@@ -27,7 +26,6 @@ public class DriveTrain extends SubsystemBase {
   DifferentialDrive drive;
   Encoder m_leftEncoder;
   Encoder m_rightEncoder;
-  AnalogGyro m_gyro;
 
   //private final m_leftEncoder m_encoder = new Encoder(1, 2, false, CounterBase.EncodingType.k4X);
 
@@ -52,9 +50,6 @@ public class DriveTrain extends SubsystemBase {
     m_rightEncoder.setDistancePerPulse(1.0 / 360.0 * 2.0 * Math.PI * 1.5);
     m_leftEncoder.setMinRate(1.0);
     m_rightEncoder.setMinRate(1.0);
-
-    m_gyro = new AnalogGyro(Constants.GYRO_PORT_NUMBER);
-  
 
   }
 @Override

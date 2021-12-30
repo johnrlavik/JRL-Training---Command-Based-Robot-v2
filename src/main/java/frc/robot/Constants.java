@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -49,16 +47,6 @@ public final class Constants {
 	public static final int PISTON1_PORT_REVERSE = 1;
 	public static final int PISTON2_PORT_FORWARD = 2;
 	public static final int PISTON2_PORT_REVERSE = 3;
-
-	//gyro
-	public static final int GYRO_PORT_NUMBER = 0;	//must be either 0 or 1
-	private static final double ANGLE_SET_POINT = 0.0	//may want to move to DriveTrain and make it changeable (not final)
-	private static final double PROPORTIONAL_TURNING_CONSTANT = 0.005; // propotional turning constant
-
-  // gyro calibration constant, may need to be adjusted;
-  // gyro value of 360 is set to correspond to one full revolution
-  private static final double VOLTS_PER_DEGREE_PER_SECOND = 0.0128;
-
 
 	
 
